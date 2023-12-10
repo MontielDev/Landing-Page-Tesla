@@ -25,7 +25,7 @@ import Section from "./Section.astro"
         slot="background"
         alt="Cybertruck"
         class="h-full w-full object-cover object-center"
-        src="./public/cybertruck.avif"
+        src="cybertruck.avif"
         id="bg-image-cybertruck"
     />
 </Section>
@@ -47,8 +47,8 @@ import Section from "./Section.astro"
     ) as HTMLImageElement
 
     if (isEdge()) {
-        imageElement.src = "./public/cybertruck.webp"
+        imageElement.src = "cybertruck.webp"
     } else {
-        imageElement.src = "./public/cybertruck.avif"
+        imageElement.src = "cybertruck.avif"
     }
 </script>
