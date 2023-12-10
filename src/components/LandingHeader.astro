@@ -1,47 +1,51 @@
 ---
-import Logo from './Logo.astro';
+import Logo from "./Logo.astro"
 ---
 
 <header
     id="landing-header"
-    class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white">
-
+    class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
+    >
     <div class="flex flex-grow basis-0">
-        <Logo/>
+        <a href="./"><Logo /></a>
     </div>
 
-    <nav>
-        <ul class="flex text-sm [&>li>a]:transition-color [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
-            <li><a href="#">Model S</a></li>
-            <li><a href="#">Model 3</a></li>
-            <li><a href="#">Model X</a></li>
-            <li><a href="#">Model Y</a></li>
-            <li><a href="#">Powerwall</a></li>
-            <li><a href="#">Carga</a: Element></li>
+    <nav class="hidden xl:block sm:hidden">
+        <ul
+        class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        >
+            <li><a href="#model-s">Model S</a></li>
+            <li><a href="#model-3">Model 3</a></li>
+            <li><a href="#model-x">Model X</a></li>
+            <li><a href="#model-y">Model Y</a></li>
+            <li><a href="#cybertruck">CyberTruck</a></li>
+            <li><a href="#powerwall">Powerwall</a></li>
+            <li><a href="#accesorios">Carga</a></li>
         </ul>
     </nav>
-        
+
     <nav class="flex flex-grow justify-end basis-0">
-        <ul class="flex text-sm [&>li>a]:transition-color [&>li>a]:duration-500 [&>li>a]:text-current  [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
-            <li><a href="#">Soporte</a></li>
-            <li><a href="#">Tienda</a></li>
-            <li><a href="#">Cuenta</a></li>
+        <ul
+        class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        >
+            <li class="hidden xl:block sm:hidden"><a href="#">Tienda</a></li>
+            <li class="hidden xl:block sm:hidden"><a href="#">Cuenta</a></li>
             <li><a href="#">Menú</a></li>
         </ul>
     </nav>
 
-    <div 
+    <div
         id="menu-backdrop"
         class={`
-        absolute bg-black/5 backdrop-blur-lg rounded
-        translate-x-[var(--left)] translate-y-[var(--top)]
-        left-0 top-0
-        w-[var(--width)] h-[var(--height)]
-        transition-all duration-500
-        ease-in-out opacity-0 -z-10
+            absolute bg-black/5 backdrop-blur-lg rounded
+            translate-x-[var(--left)] translate-y-[var(--top)]
+            left-0 top-0
+            w-[var(--width)] h-[var(--height)]
+            transition-all duration-500
+            ease-in-out opacity-0 -z-10
         `}
-    />
-    
+    >
+    </div>
 </header>
 
 <script>
@@ -49,7 +53,7 @@ import Logo from './Logo.astro';
     const menuBackDrop = document.querySelector("#menu-backdrop") as HTMLElement
 
     listItem.forEach((item) => {
-    item.addEventListener("mouseenter", () => {
+        item.addEventListener("mouseenter", () => {
         const { left, top, width, height } = item.getBoundingClientRect()
 
         menuBackDrop.style.setProperty("--left", `${left}px`)
@@ -69,24 +73,24 @@ import Logo from './Logo.astro';
 </script>
 
 <script>
-    const $header = document.querySelector("#landing-header") as HTMLElement
+    const headerEl = document.querySelector("#landing-header") as HTMLElement
 
-const observerOptions = {
-    root: null,
-    rootMargin: "0px", // en cuanto se vea el elemento
-    threshold: 0.9, // porcentaje de visibilidad
-}
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px", // en cuanto se vea el elemento
+        threshold: 0.9, // porcentaje de visibilidad
+    }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
         const { isIntersecting } = entry
         if (isIntersecting) {
-        const color = entry.target.getAttribute("data-header-color")
-        $header.style.color = color
+            const color = entry.target.getAttribute("data-header-color")
+            headerEl.style.color = color
         }
-    })
+        })
     }, observerOptions)
 
-const $section = document.querySelectorAll(".landing-section")
-$section.forEach((section) => observer.observe(section))
+    const sectionElements = document.querySelectorAll(".landing-section")
+    sectionElements.forEach((section) => observer.observe(section))
 </script>
